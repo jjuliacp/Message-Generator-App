@@ -4,15 +4,16 @@ import { Button, TextField, Typography } from "@mui/material";
 import { produce } from "immer";
 import { useState } from "react";
 import { defaultMessage } from "../utils/utils";
+interface FlowData {
+  channels: string[];
+  messages: { [key: string]: { subject?: string; body: string } };
+}
 
 interface Step3Props {
   nextStep: () => void;
   prevStep: () => void;
-  flowData: {
-    channels: string[];
-    messages: { [key: string]: { subject?: string; body: string } };
-  };
-  setFlowData: (data: (prev: any) => any) => void;
+  flowData: FlowData;
+  setFlowData: (data: (prev: FlowData) => FlowData) => void;
 }
 
 function MessageForm({
@@ -77,7 +78,7 @@ function MessageForm({
         rows={3}
         value={
           flowData.messages[currentChannel]?.body ||
-          defaultMessage(currentChannel).body // Usar la función importada
+          defaultMessage(currentChannel).body
         }
         onChange={handleChange}
         sx={{ mb: 2 }}

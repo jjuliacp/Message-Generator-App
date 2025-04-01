@@ -41,7 +41,6 @@ function App() {
         {step === 1 && (
           <TemplateSelection
             nextStep={nextStep}
-            prevStep={prevStep}
             flowData={flowData}
             setFlowData={updateFlowData}
           />

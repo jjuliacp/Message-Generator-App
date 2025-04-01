@@ -8,7 +8,6 @@ interface Step4Props {
     template: string;
     channels: string[];
     messages: { [key: string]: { subject?: string; body: string } };
-    processName: string;
   };
 }
 
@@ -19,9 +18,7 @@ function Confirmation({ prevStep, flowData }: Step4Props) {
   const handleSend = () => {
     // Asegurar que todos los canales tengan un mensaje asignado
     const updatedMessages = flowData.channels.reduce((acc, channel) => {
-      acc[channel] =
-        flowData.messages[channel] ||
-        defaultMessage(channel, flowData.processName);
+      acc[channel] = flowData.messages[channel] || defaultMessage(channel);
       return acc;
     }, {} as { [key: string]: { subject?: string; body: string } });
 
